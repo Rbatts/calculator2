@@ -10,6 +10,8 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
+            string myString = "42";
+            int myInteger = int.Parse(myString);
         }
     }
 }
