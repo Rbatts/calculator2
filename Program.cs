@@ -12,19 +12,42 @@ namespace ConsoleApp2
         {
             //string myString = "42";
             //int myInteger = int.Parse(myString);
+            Console.Write("Welcome to the calculator\n");
 
             Console.Write("Please enter a number\n");
-            string uResponse = Console.ReadLine();
-            int firstNumber = int.Parse(uResponse);
+            string uResponse2 = Console.ReadLine();
+            int firstNumber = int.Parse(uResponse2);
+
+            Console.Write("Enter your opperator\n");
+            string opperator = Console.ReadLine();
 
             Console.Write("Please enter another number\n");
-            string uResponse2 = Console.ReadLine();
-            int secondNumber = int.Parse(uResponse2);
+            string uResponse3 = Console.ReadLine();
+            int secondNumber = int.Parse(uResponse3);
+
+            int answer = 0;
+
+            if (opperator == "+")
+            {
+                answer = (firstNumber + secondNumber);
+            }
+            else if (opperator == "/")
+            {
+                answer = (firstNumber / secondNumber);
+            }
+            else if (opperator == "*")
+            {
+                answer = (firstNumber * secondNumber);
+            }
+            else if (opperator == "-")
+            {
+                answer = (firstNumber - secondNumber);
+            }
 
             Console.WriteLine("Answer");
-            int answer = firstNumber* secondNumber;
             Console.WriteLine(answer);
             Console.ReadLine();
+        
         }
 
 
