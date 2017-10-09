@@ -10,38 +10,43 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            //string myString = "42";
-            //int myInteger = int.Parse(myString);
             Console.Write("Welcome to the calculator\n");
-
-            Console.Write("Please enter a number\n");
-            string uResponse2 = Console.ReadLine();
-            int firstNumber = int.Parse(uResponse2);
 
             Console.Write("Enter your opperator\n");
             string opperator = Console.ReadLine();
 
-            Console.Write("Please enter another number\n");
-            string uResponse3 = Console.ReadLine();
-            int secondNumber = int.Parse(uResponse3);
+            Console.Write("How many numbers do you want to" + " " + opperator + " " + "?");
+            int count = int.Parse(Console.ReadLine());
 
-            int answer = 0;
+            int[] response = new int[count];
+            for (int index = 0; index < count; index++)
+            {
+
+                Console.Write("Please enter number " + (index + 1) + ": ");
+                response[index] = int.Parse(Console.ReadLine());
+
+            }
+
+            int answer = response[0];
+
+            for (int index = 1; index < count; index++)
+
 
             if (opperator == "+")
             {
-                answer = (firstNumber + secondNumber);
+                answer = (answer + response[index]);
             }
             else if (opperator == "/")
             {
-                answer = (firstNumber / secondNumber);
+                answer = (answer / response[index]);
             }
             else if (opperator == "*")
             {
-                answer = (firstNumber * secondNumber);
+                answer = (answer * response[index]);
             }
             else if (opperator == "-")
             {
-                answer = (firstNumber - secondNumber);
+                answer = (answer - response[index]);
             }
 
             Console.WriteLine("Answer");
