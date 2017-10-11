@@ -23,8 +23,13 @@ namespace ConsoleApp2
 
             try
             {
-                Console.Write("Enter your opperator\n");
+                Console.Write("Enter your operator\n");
                 string opperator = Console.ReadLine();
+                while (opperator != "+" && opperator !="-" && opperator != "*" && opperator != "/")
+                {
+                    Console.WriteLine("You've entered an incorrect operator.\nAn operator should be * / - +");
+                    opperator = Console.ReadLine();
+                }
                 
                 Console.Write("How many numbers do you want to" + " " + opperator + " " + "?");
                 int count = int.Parse(Console.ReadLine());
@@ -66,7 +71,7 @@ namespace ConsoleApp2
             }
             catch
             {
-                Console.WriteLine("I'm sorry you've entered either your numbers or opperator incorrectly.\n Remember an opperator is either + - / * ");
+                Console.WriteLine("I'm sorry you've entered either your numbers or operator incorrectly.\n Remember an operator is either + - / * ");
                 Console.ReadLine();
             }
        
