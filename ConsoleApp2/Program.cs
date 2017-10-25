@@ -8,13 +8,12 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace Calculator2
 {
     class Program
     {
         private const int NumberCalculator = 1;
         private const int DateCalculator = 2;
-
 
         static void Main(string[] args)
         {

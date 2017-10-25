@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace Calculator2
 {
     class NumberCalculator
     {
@@ -58,7 +58,6 @@ namespace ConsoleApp2
                     Console.WriteLine("Answer");
                     Console.WriteLine(answer);
                     Console.ReadLine();
-  
 
             }
             catch
