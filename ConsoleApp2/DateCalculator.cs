@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleApp2;
+using System;
 
-namespace Calculator2
+namespace Consoleapp2
 {
     class DateCalculator
     {
+        private Logger logger;
+        public DateCalculator(Logger logger)
+        {
+            this.logger = logger;
+        }
         public void DateFunction()
         {
              try
              {
+                
                 Console.WriteLine("\nPlease enter your date in the format dd/mm/yyyy.\n");
                 string responsedatetime = Console.ReadLine();
                 DateTime dt = Convert.ToDateTime(responsedatetime);
@@ -23,11 +26,11 @@ namespace Calculator2
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nNew Date");
                 Console.WriteLine(dt2);
+                logger.LogCalculation(string.Format("{0:dd/MM/yyyy} + {1}", responsedatetime, dateadded), dt2.ToString("dd/MM/yyyy"));
                 Console.ReadLine();
                 Console.ResetColor();
                 Console.Clear();
              }
-
              catch
              {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -39,5 +42,7 @@ namespace Calculator2
              }
 
         }
+
     }  
+
 }

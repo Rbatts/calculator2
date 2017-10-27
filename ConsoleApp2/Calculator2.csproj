@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateCalculator.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Logs.cs" />
     <Compile Include="NumberCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

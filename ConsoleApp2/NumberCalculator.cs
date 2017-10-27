@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleApp2;
+using System;
 
-namespace Calculator2
+namespace Consoleapp2
 {
     class NumberCalculator
     {
+        private Logger logger;
+
+        public NumberCalculator(Logger logger)
+        {
+            this.logger = logger;
+        }
         public void CalculatorFunction()
         {
             try
             {
                 Console.Write("\nWelcome to the Calculator mode.\n\nPlease enter your operator\n");
-                string opperator = Console.ReadLine();
+                var opperator = Console.ReadLine();
                 while (opperator != "+" && opperator != "-" && opperator != "*" && opperator != "/")
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -23,8 +26,7 @@ namespace Calculator2
                 }
 
                 Console.Write("How many numbers do you want to" + " " + opperator + " " + "?");
-                int count = int.Parse(Console.ReadLine());
-
+                var count = int.Parse(Console.ReadLine());
 
                 int[] response = new int[count];
 
@@ -54,9 +56,11 @@ namespace Calculator2
                         {
                             answer = (answer - response[index]);
                         }
-
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Answer");
                     Console.WriteLine(answer);
+                    Console.ResetColor();
+                    logger.LogCalculation(string.Join(opperator, response), answer.ToString());
                     Console.ReadLine();
 
             }
@@ -69,7 +73,9 @@ namespace Calculator2
             }
 
             Console.Clear();
-            
+
         }
+
     }
+
 }

@@ -1,33 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleApp2;
+using System;
 
-namespace Calculator2
+namespace Consoleapp2
 {
     class Program
     {
-        private const int NumberCalculator = 1;
-        private const int DateCalculator = 2;
-
         static void Main(string[] args)
         {
             {
+                var logger = new Logger();
                 bool MainMenu = true;
                 while (MainMenu == true)
                 {
-                    MainMenu = Menu();
+                    MainMenu = Menu(logger);
                 }
             }
-
         }
-
-        public static bool Menu()
+        public static bool Menu(Logger logger)
         {
             Console.WriteLine("\nWelcome To The Calculator!");
             Console.WriteLine("\nPlease enter\n\n(1) to use the dates mode\n    or   \n(2) to use the Calculator mode.\n");
@@ -43,17 +32,15 @@ namespace Calculator2
                 }
             if (mode == "1")
             {
-                new DateCalculator().DateFunction();
+                new DateCalculator(logger).DateFunction();
             }
             else if (mode == "2")
             {
-                new NumberCalculator().CalculatorFunction();
+                new NumberCalculator(logger).CalculatorFunction();
             }
-
                 return true;
-        }
+        }  
 
-        
     }
 
 }
