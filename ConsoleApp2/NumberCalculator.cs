@@ -1,5 +1,8 @@
-﻿using ConsoleApp2;
+﻿using Calculator;
+using ConsoleApp2;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Consoleapp2
 {
@@ -11,68 +14,49 @@ namespace Consoleapp2
         {
             this.logger = logger;
         }
+
         public void CalculatorFunction()
         {
-            try
-            {
-                Console.Write("\nWelcome to the Calculator mode.\n\nPlease enter your operator\n");
-                var opperator = Console.ReadLine();
-                while (opperator != "+" && opperator != "-" && opperator != "*" && opperator != "/")
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\nYou've entered an incorrect operator.\nAn operator should be * / - +");
-                    opperator = Console.ReadLine();
-                    Console.ResetColor();
-                }
-
-                Console.Write("How many numbers do you want to" + " " + opperator + " " + "?");
-                var count = int.Parse(Console.ReadLine());
-
-                int[] response = new int[count];
-
-                for (int index = 0; index < count; index++)
-                {
-                    Console.Write("Please enter number " + (index + 1) + ": ");
-                    response[index] = int.Parse(Console.ReadLine());
-                }
-
-                int answer = response[0];
-
-                for (int index = 1; index < count; index++)
-
-                        if (opperator == "+")
-                        {
-                            answer = (answer + response[index]);
-                        }
-                        else if (opperator == "/")
-                        {
-                            answer = (answer / response[index]);
-                        }
-                        else if (opperator == "*")
-                        {
-                            answer = (answer * response[index]);
-                        }
-                        else if (opperator == "-")
-                        {
-                            answer = (answer - response[index]);
-                        }
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Answer");
-                    Console.WriteLine(answer);
-                    Console.ResetColor();
-                    logger.LogCalculation(string.Join(opperator, response), answer.ToString());
-                    Console.ReadLine();
-
-            }
-            catch
+            var opperator = Prompts.UserOpperator("Please enter the operator: ");
+            while (opperator != "+" && opperator != "-" && opperator != "*" && opperator != "/")
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("I'm sorry you've entered either your numbers or operator incorrectly.\n Remember an operator is either + - / * ");
-                Console.ReadLine();
+                Console.WriteLine("\nYou've entered an incorrect operator.\nAn operator should be * / - +");
+                opperator = Console.ReadLine();
                 Console.ResetColor();
             }
+            var response = Prompts.UserNumbers(string.Format("Please enter the numbers to {0}. ", opperator));
+            var answer = CalculateAnswer(opperator, response);
 
+            logger.LogCalculation(string.Join(opperator, response), answer.ToString());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("The answer is: {0}", answer);
+            Console.WriteLine();
+            Console.ReadLine();
+            Console.ResetColor();
             Console.Clear();
+        }
+
+        private int CalculateAnswer(string opperator, List<int> response)
+        {
+            if (opperator == "*")
+            {
+                return response.Aggregate(1, (acc, number) => acc * number);
+            }
+            else if (opperator == "/")
+            {
+                return response.Skip(1).Aggregate(response[0], (acc, number) => acc / number);
+            }
+            else if (opperator == "+")
+            {
+                return response.Sum();
+            }
+            else if (opperator == "-")
+            {
+                return response.Skip(1).Aggregate(response[0], (acc, number) => acc - number);
+            }
+
+            return -1;
 
         }
 

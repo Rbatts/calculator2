@@ -46,6 +46,7 @@
     <Compile Include="Logs.cs" />
     <Compile Include="NumberCalculator.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Prompts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

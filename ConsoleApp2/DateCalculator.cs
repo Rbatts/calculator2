@@ -13,8 +13,7 @@ namespace Consoleapp2
         public void DateFunction()
         {
              try
-             {
-                
+             {    
                 Console.WriteLine("\nPlease enter your date in the format dd/mm/yyyy.\n");
                 string responsedatetime = Console.ReadLine();
                 DateTime dt = Convert.ToDateTime(responsedatetime);
@@ -23,7 +22,7 @@ namespace Consoleapp2
                 string dateadded = Console.ReadLine();
                 DateTime dt2 = dt.AddDays(Convert.ToInt32(dateadded));
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nNew Date");
                 Console.WriteLine(dt2);
                 logger.LogCalculation(string.Format("{0:dd/MM/yyyy} + {1}", responsedatetime, dateadded), dt2.ToString("dd/MM/yyyy"));

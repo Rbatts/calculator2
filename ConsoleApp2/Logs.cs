@@ -19,5 +19,7 @@ namespace ConsoleApp2
         {
             File.AppendAllText(LogFile, string.Format("{0} = {1}{2}", question, answer, Environment.NewLine));
         }
+
     }
+
 }
