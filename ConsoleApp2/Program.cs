@@ -1,51 +1,64 @@
-﻿using ConsoleApp2;
+﻿using Consoleapp2;
+using ConsoleApp2;
 using System;
-
-namespace Consoleapp2
+namespace Calculator
 {
     class Program
     {
+        enum CalculatorType
+        {
+            Number = 1,
+            Date = 2
+        }
+
         static void Main()
         {
-            {
-                var logger = new Logger();
-                bool MainMenu = true;
-                while (MainMenu)
+            var logger = new Logger();
+
+            while (true)
+            { 
+                try
                 {
-                    MainMenu = Menu(logger);
+                    PrintWelcomeMessage();
+                    CalculatorType calculationMode = AskForCalculationMode();
+
+                    if (calculationMode == CalculatorType.Number)
+                    {
+                        new NumberCalculator(logger).CalculatorFunction();
+                    }
+                    else if (calculationMode == CalculatorType.Date)
+                    {
+                        new DateCalculator(logger).DateFunction();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("You must enter the mode Dates or Calculator");
+                        Console.ReadLine();
+                        Console.ResetColor();
+                        Console.Clear();
+                    }
+                }
+                catch
+                {
+                    
                 }
             }
         }
-        public static bool Menu(Logger logger)
+
+        private static void PrintWelcomeMessage()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nWelcome To The Calculator!");
             Console.WriteLine("\n--------------------------");
             Console.ResetColor();
-            Console.WriteLine("\nPlease enter\n\n(1) to use the dates mode\n    or   \n(2) to use the Calculator mode.\n");
-                string mode = Console.ReadLine();
-                while (mode != "1" && mode != "2")
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("You must enter the mode Dates or Calculator");
-                    Console.ReadLine();
-                    Console.ResetColor();
-                    Console.Clear();
-                    return true;
-                }
-            
-            if (mode == "1")
-            {
-                new DateCalculator(logger).DateFunction();
-            }
-            else if (mode == "2")
-            {
-                new NumberCalculator(logger).CalculatorFunction();
-            }
- 
-            return true;
-        }  
+        }
 
+        private static CalculatorType AskForCalculationMode()
+        {
+            Console.WriteLine("\nPlease Enter\n\n{0} > to use the Calculator mode:\n", (int)CalculatorType.Number);
+            Console.WriteLine("\n{0} > to use the Dates mode:\n", (int)CalculatorType.Date);
+            return (CalculatorType)Prompts.AskForNumber("");
+        }
     }
-
 }

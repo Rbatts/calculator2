@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateCalculator.cs" />
+    <Compile Include="Exception.cs" />
     <Compile Include="Logs.cs" />
     <Compile Include="NumberCalculator.cs" />
     <Compile Include="Program.cs" />

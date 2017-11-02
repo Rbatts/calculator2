@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Calculator
+namespace ConsoleApp2
 {
     class Prompts
     {
@@ -9,7 +9,7 @@ namespace Calculator
         {
             while (true)
             {
-                int? maybeNumber = AskForOptionalNumber(message);
+                int? maybeNumber = AskForOptionalNumber(message, out bool terminate);
 
                 if (maybeNumber.HasValue)
                 {
@@ -18,8 +18,9 @@ namespace Calculator
             }
         }
 
-        public static int? AskForOptionalNumber(string message)
+        public static int? AskForOptionalNumber(string message, out Boolean terminate)
         {
+            terminate = false;
             while (true)
             {
                 Console.Write(message);
@@ -27,14 +28,16 @@ namespace Calculator
 
                 if (string.IsNullOrEmpty(input))
                 {
+                    terminate = true;
                     return null;
                 }
 
-                int number;
-                if (int.TryParse(input, out number))
+                if (!int.TryParse(input, out int number))
                 {
-                    return number;
+                    return null;
                 }
+
+                return number;
             }
         }
 
@@ -42,23 +45,29 @@ namespace Calculator
         {
             Console.WriteLine(message);
             List<int> numbers = new List<int>();
-
+            
             while (true)
             {
-                int? number = AskForOptionalNumber("  Please enter the next number: ");
-
-                if (number.HasValue)
-                {
-                    numbers.Add(number.Value);
-                }
-                else
+                Console.ResetColor();
+                int? number = AskForOptionalNumber("\nPlease enter the next number: ", out bool terminate);
+                if (terminate)
                 {
                     break;
                 }
+                if (number.HasValue)
+                {
+                  numbers.Add(number.Value);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("You haven't entered a number\n");
+                    Console.ResetColor();
+                }
             }
-
             return numbers;
         }
+        
 
         public static string UserOpperator(string message)
         {
