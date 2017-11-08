@@ -16,33 +16,39 @@ namespace Consoleapp2
 
         public void CalculatorFunction()
         {
-            var opperator = Prompts.UserOpperator("\nPlease enter the operator: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            var opperator = Prompts.UserOpperator("\nCALCULATOR MODE:\n\nPlease enter the operator: ");
+            Console.ResetColor();
             while (opperator != "+" && opperator != "-" && opperator != "*" && opperator != "/")
             {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nERROR");
+
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nYou've entered an incorrect operator.\nAn operator should be * / - +");
+
                 opperator = Console.ReadLine();
                 Console.ResetColor();
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            var response = Prompts.UserNumbers(string.Format("\nPlease enter the numbers to {0}", opperator));
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            var response = Prompts.UserNumbers($"\nPlease enter the numbers to {opperator}");
+            Console.ResetColor();
             var answer = CalculateAnswer(opperator, response);
 
             logger.LogCalculation(string.Join(opperator, response), answer.ToString());
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nThe answer is: {0}", answer);
-            Console.WriteLine();
             Console.ReadLine();
             Console.ResetColor();
             Console.Clear();
         }
 
-        private int CalculateAnswer(string opperator, List<int> response)
+        private long CalculateAnswer(string opperator, List<long> response)
         {
             switch (opperator)
             {
                 case "*":
-                return response.Aggregate(1, (acc, number) => acc * number);
+                return response.Skip(1).Aggregate(response[0], (acc, number) => acc * number);
 
                 case "/":
                 return response.Skip(1).Aggregate(response[0], (acc, number) => acc / number);
@@ -55,11 +61,7 @@ namespace Consoleapp2
                
                     default:
                         throw new InvalidOperatorException(opperator);
-
             }
-
         }
-
     }
-
 }

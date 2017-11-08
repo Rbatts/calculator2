@@ -1,7 +1,7 @@
 ﻿using Consoleapp2;
-using ConsoleApp2;
 using System;
-namespace Calculator
+
+namespace ConsoleApp2
 {
     class Program
     {
@@ -32,11 +32,14 @@ namespace Calculator
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nERROR");
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("You must enter the mode Dates or Calculator");
-                        Console.ReadLine();
+                        Console.WriteLine("\nPlease Enter 1 or 2 to use the Calculator\n");
                         Console.ResetColor();
+                        Console.ReadLine();
                         Console.Clear();
+
                     }
                 }
                 catch
@@ -49,15 +52,15 @@ namespace Calculator
         private static void PrintWelcomeMessage()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nWelcome To The Calculator!");
-            Console.WriteLine("\n--------------------------");
+            Console.WriteLine("\nWELCOME TO THE CALCULATOR!");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.ResetColor();
         }
 
         private static CalculatorType AskForCalculationMode()
         {
-            Console.WriteLine("\nPlease Enter\n\n{0} > to use the Calculator mode:\n", (int)CalculatorType.Number);
-            Console.WriteLine("\n{0} > to use the Dates mode:\n", (int)CalculatorType.Date);
+            Console.WriteLine("\nPLEASE ENTER\n\n{0} > to use the Calculator mode:", (long)CalculatorType.Number);
+            Console.WriteLine("\n{0} > to use the Dates mode:\n", (long)CalculatorType.Date);
             return (CalculatorType)Prompts.AskForNumber("");
         }
     }

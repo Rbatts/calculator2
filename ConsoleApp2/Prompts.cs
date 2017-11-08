@@ -5,20 +5,28 @@ namespace ConsoleApp2
 {
     class Prompts
     {
-        public static int AskForNumber(string message)
+        public static long AskForNumber(string message)
         {
             while (true)
             {
-                int? maybeNumber = AskForOptionalNumber(message, out bool terminate);
+                long? maybeNumber = AskForOptionalNumber(message, out bool terminate);
 
                 if (maybeNumber.HasValue)
                 {
                     return maybeNumber.Value;
                 }
+                else 
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("ERROR");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nPlease Enter 1 or 2 to use the Calculator\n");
+                    Console.ResetColor();
+                }
             }
         }
 
-        public static int? AskForOptionalNumber(string message, out Boolean terminate)
+        public static long? AskForOptionalNumber(string message, out Boolean terminate)
         {
             terminate = false;
             while (true)
@@ -31,51 +39,47 @@ namespace ConsoleApp2
                     terminate = true;
                     return null;
                 }
-
-                if (!int.TryParse(input, out int number))
+                if (!long.TryParse(input, out long number))
                 {
                     return null;
                 }
-
                 return number;
             }
         }
 
-        public static List<int> UserNumbers(string message)
+        public static List<long> UserNumbers(string message)
         {
             Console.WriteLine(message);
-            List<int> numbers = new List<int>();
-            
+            List<long> numbers = new List<long>();
+
             while (true)
             {
                 Console.ResetColor();
-                int? number = AskForOptionalNumber("\nPlease enter the next number: ", out bool terminate);
+                long? number = AskForOptionalNumber("\nPlease enter the next number: ", out bool terminate);
                 if (terminate)
                 {
                     break;
                 }
                 if (number.HasValue)
                 {
-                  numbers.Add(number.Value);
+                    numbers.Add(number.Value);
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("You haven't entered a number\n");
-                    Console.ResetColor();
+                    Console.WriteLine("\nYou have entered an invalid number.\n\nOr a number that is too large.");
+                    Console.ReadLine();
+                    numbers = null;
+                    Console.Clear();
                 }
             }
             return numbers;
         }
-        
-
         public static string UserOpperator(string message)
         {
             Console.Write(message);
             string opperator = Console.ReadLine();
-            return opperator;
+            return opperator;   
         }
-
     }
-
 }

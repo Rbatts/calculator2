@@ -17,9 +17,7 @@ namespace ConsoleApp2
 
         public void LogCalculation(string question, string answer)
         {
-            File.AppendAllText(LogFile, string.Format("{0} = {1}{2}", question, answer, Environment.NewLine));
+            File.AppendAllText(LogFile, $"{question} = {answer}{Environment.NewLine}");
         }
-
     }
-
 }

@@ -4,7 +4,7 @@ namespace ConsoleApp2
 {
     public class InvalidOperatorException : Exception
     {
-        public InvalidOperatorException(string opperator) : base(string.Format("The operation {0} is not supported.", opperator))
+        public InvalidOperatorException(string opperator) : base($"The operation {opperator} is not supported.")
         {
          
         }
